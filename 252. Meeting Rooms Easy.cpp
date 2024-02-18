@@ -39,3 +39,28 @@ Constraints:
 0 <= intervals.length <= 104
 intervals[i].length == 2
 0 <= starti < endi <= 106
+
+
+
+ ********************************************* SOLUTION ************************************************************************
+
+ //TC: O(nlogn)
+ //SC : O(1)
+
+ class Solution {
+public:
+    static bool comp(vector<int> &vec1,vector<int> &vec2){
+      return  vec1[0]<vec2[0];
+    }
+   
+
+    bool canAttendMeetings(vector<vector<int>>& intervals) {
+        int n=intervals.size();
+        sort(begin(intervals),end(intervals),comp);
+       
+        for(int i=1;i<n;i++){
+            if(intervals[i][0]<intervals[i-1][1])return false;
+        }
+        return true;
+    }
+};
