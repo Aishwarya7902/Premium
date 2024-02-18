@@ -73,3 +73,44 @@ Constraints:
 
 1 <= intervals.length <= 104
 0 <= starti < endi <= 106
+
+
+
+  ********************************************************  SOLUTION ***************************************************
+//TC : O(nlogn)
+//SC : O(n)
+class Solution {
+public:
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        vector<int>start;
+        vector<int>endTime;
+        int n=intervals.size();
+        for(auto it:intervals){
+            start.push_back(it[0]);
+            endTime.push_back(it[1]);
+        }
+
+        sort(begin(start),end(start));
+        sort(begin(endTime),end(endTime));
+
+        int res=0,count=0;
+
+        int s=0,e=0;
+
+        while(s<n){
+
+            if(start[s]<endTime[e]){ //start a new meet
+                count++;
+                s++;
+            }
+            else{ //end a meet
+                e++;
+                count--;
+            }
+
+            res=max(res,count);
+        }
+
+        return res;
+    }
+};
